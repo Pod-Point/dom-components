@@ -1,19 +1,20 @@
-const fabAssemble = require('fabricator-assemble');
-const browserSync = require('browser-sync');
-const csso = require('gulp-csso');
-const del = require('del');
-const gulp = require('gulp');
-const argv = require('minimist')(process.argv.slice(2));
-const log = require('fancy-log');
-const gulpif = require('gulp-if');
-const imagemin = require('gulp-imagemin');
-const prefix = require('gulp-autoprefixer');
-const rename = require('gulp-rename');
-const sass = require('gulp-sass');
-const postcss = require('gulp-postcss');
-const sourcemaps = require('gulp-sourcemaps');
-const webpack = require('webpack');
-sass.compiler = require('node-sass');
+const fabAssemble = require("fabricator-assemble");
+const browserSync = require("browser-sync");
+const csso = require("gulp-csso");
+const del = require("del");
+const gulp = require("gulp");
+const argv = require("minimist")(process.argv.slice(2));
+const log = require("fancy-log");
+const gulpif = require("gulp-if");
+const imagemin = require("gulp-imagemin");
+const prefix = require("gulp-autoprefixer");
+const rename = require("gulp-rename");
+const sass = require("gulp-sass");
+const postcss = require("gulp-postcss");
+const sourcemaps = require("gulp-sourcemaps");
+const webpack = require("webpack");
+sass.compiler = require("node-sass");
+const tailwindcss = require("tailwindcss");
 
 let server = false;
 function reload(done) {
@@ -26,48 +27,48 @@ const config = {
   dev: !!argv.dev,
   styles: {
     browsers: [
-      'ie 11',
-      'edge >= 16',
-      'chrome >= 70',
-      'firefox >= 63',
-      'safari >= 11',
-      'iOS >= 12',
-      'ChromeAndroid >= 70',
+      "ie 11",
+      "edge >= 16",
+      "chrome >= 70",
+      "firefox >= 63",
+      "safari >= 11",
+      "iOS >= 12",
+      "ChromeAndroid >= 70"
     ],
     fabricator: {
-      src: 'src/assets/fabricator/styles/fabricator.scss',
-      dest: 'dist/assets/fabricator/styles',
-      watch: 'src/assets/fabricator/styles/**/*.scss',
+      src: "src/assets/fabricator/styles/fabricator.scss",
+      dest: "dist/assets/fabricator/styles",
+      watch: "src/assets/fabricator/styles/**/*.scss"
     },
     toolkit: {
-      src: 'src/assets/toolkit/styles/toolkit.scss',
-      dest: 'dist/assets/toolkit/styles',
-      watch: 'src/assets/toolkit/styles/**/*.scss',
-    },
+      src: "src/assets/toolkit/styles/toolkit.scss",
+      dest: "dist/assets/toolkit/styles",
+      watch: "src/assets/toolkit/styles/**/*.scss"
+    }
   },
   scripts: {
     fabricator: {
-      src: './src/assets/fabricator/scripts/fabricator.js',
-      dest: 'dist/assets/fabricator/scripts',
-      watch: 'src/assets/fabricator/scripts/**/*',
+      src: "./src/assets/fabricator/scripts/fabricator.js",
+      dest: "dist/assets/fabricator/scripts",
+      watch: "src/assets/fabricator/scripts/**/*"
     },
     toolkit: {
-      src: './src/assets/toolkit/scripts/toolkit.js',
-      dest: 'dist/assets/toolkit/scripts',
-      watch: 'src/assets/toolkit/scripts/**/*',
-    },
+      src: "./src/assets/toolkit/scripts/toolkit.js",
+      dest: "dist/assets/toolkit/scripts",
+      watch: "src/assets/toolkit/scripts/**/*"
+    }
   },
   images: {
     toolkit: {
-      src: ['src/assets/toolkit/images/**/*', 'src/favicon.ico'],
-      dest: 'dist/assets/toolkit/images',
-      watch: 'src/assets/toolkit/images/**/*',
-    },
+      src: ["src/assets/toolkit/images/**/*", "src/favicon.ico"],
+      dest: "dist/assets/toolkit/images",
+      watch: "src/assets/toolkit/images/**/*"
+    }
   },
   templates: {
-    watch: 'src/**/*.{html,md,json,yml}',
+    watch: "src/**/*.{html,md,json,yml}"
   },
-  dest: 'dist',
+  dest: "dist"
 };
 
 // clean
@@ -78,27 +79,25 @@ function stylesFabricator() {
   return gulp
     .src(config.styles.fabricator.src)
     .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass().on("error", sass.logError))
     .pipe(prefix(config.styles.browsers))
     .pipe(gulpif(!config.dev, csso()))
-    .pipe(rename('f.css'))
+    .pipe(rename("f.css"))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.styles.fabricator.dest));
 }
 
 function stylesToolkit() {
-  const tailwindcss = require('tailwindcss');
-
   return gulp
     .src(config.styles.toolkit.src)
     .pipe(gulpif(config.dev, sourcemaps.init()))
     .pipe(
       sass({
-        includePaths: './node_modules',
-      }).on('error', sass.logError)
+        includePaths: "./node_modules"
+      }).on("error", sass.logError)
     )
     .pipe(
-      postcss([tailwindcss('./tailwind.config.js'), require('autoprefixer')])
+      postcss([tailwindcss("./tailwind.config.js"), require("autoprefixer")]) // eslint-disable-line global-require
     )
     .pipe(prefix(config.styles.browsers))
     .pipe(gulpif(!config.dev, csso()))
@@ -109,7 +108,7 @@ function stylesToolkit() {
 const styles = gulp.parallel(stylesFabricator, stylesToolkit);
 
 // scripts
-const webpackConfig = require('./webpack.config')(config);
+const webpackConfig = require("./webpack.config")(config);
 
 function scripts(done) {
   webpack(webpackConfig, (err, stats) => {
@@ -128,7 +127,7 @@ function scripts(done) {
 
 // images
 function imgFavicon() {
-  return gulp.src('src/favicon.ico').pipe(gulp.dest(config.dest));
+  return gulp.src("src/favicon.ico").pipe(gulp.dest(config.dest));
 }
 
 function imgMinification() {
@@ -151,7 +150,7 @@ function assembler(done) {
       },
       // {{ concat str1 "string 2" }}
       concat: function concat(...args) {
-        return args.slice(0, args.length - 1).join('');
+        return args.slice(0, args.length - 1).join("");
       },
       // {{> (dynamicPartial name) }} ---- name = 'nameOfComponent'
       dynamicPartial: function dynamicPartial(name) {
@@ -195,8 +194,8 @@ function assembler(done) {
       },
       mod: function mod(a, b) {
         return +a % +b;
-      },
-    },
+      }
+    }
   });
   done();
 }
@@ -206,10 +205,10 @@ function serve(done) {
   server = browserSync.create();
   server.init({
     server: {
-      baseDir: config.dest,
+      baseDir: config.dest
     },
     notify: false,
-    logPrefix: 'FABRICATOR',
+    logPrefix: "FABRICATOR"
   });
   done();
 }
@@ -240,4 +239,4 @@ function watch() {
 // default build task
 let tasks = [clean, styles, scripts, images, assembler];
 if (config.dev) tasks = tasks.concat([serve, watch]);
-gulp.task('default', gulp.series(tasks));
+gulp.task("default", gulp.series(tasks));

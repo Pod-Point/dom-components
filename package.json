@@ -66,6 +66,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "autoprefixer": "^9.8.6",
     "tailwindcss": "^1.4.6"
   },
   "optionalDependencies": {}
