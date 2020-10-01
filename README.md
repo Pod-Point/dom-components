@@ -1,39 +1,47 @@
-[![GitHub release](https://img.shields.io/github/release/fbrctr/fabricator.svg)]()
-[![Build Status](https://travis-ci.org/fbrctr/fabricator.svg)](https://travis-ci.org/fbrctr/fabricator)
-[![devDependency Status](https://david-dm.org/fbrctr/fabricator/dev-status.svg)](https://david-dm.org/fbrctr/fabricator#info=devDependencies)
-[![Join the chat at https://gitter.im/fbrctr/fabricator](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/fbrctr/fabricator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Design system
+NOTE: This is a work in progress.
+If there are any components that are required in the meantime, please create an issue in github [here](https://github.com/Pod-Point/design-system/issues).
 
-<p align="center">
-  <img src="http://fbrctr.github.io/assets/toolkit/images/logo.svg" width="500">
-</p>
+The purpose of this design system is to show how elements/components should be displayed across our many products, and the tools and processes we use to achieve this.
 
-# Fabricator
+## Installation
 
-> _fabricate_ - to make by assembling parts or sections.
+```bash
+npm install --save @pod-point/design-system
+```
 
-Fabricator is a tool for building website UI toolkits - _think ["Tiny Bootstraps, for Every Client"](http://daverupert.com/2013/04/responsive-deliverables/#tiny-bootstraps-for-every-client)_
+## Development
 
-## Quick Start
+First, install all of the Node modules needed:
 
-```shell
-$ curl -L https://github.com/fbrctr/fabricator/archive/master.tar.gz | tar zx --strip 1
-$ npm start
+```bash
+git clone git@github.com:Pod-Point/pod-point-ui-toolkit.git
+cd pod-point-ui-toolkit
+npm install
+```
+
+## Tasks
+
+```bash
+npm start
+```
+
+```bash
+npm build
 ```
 
 ## Documentation
 
+See full docs [here](https://pod-point.github.io/pod-point-ui-toolkit)
+
+## TailwindCSS
+To use Tailwind and the Pod Point config, first [install Tailwind](https://tailwindcss.com/docs/installation) to your project and then copy the `tailwind.config.js` file into the root of your project and build the assets, we tend to use Gulp, but feel free to build as you wish.
+
+## Fabricator
+This design system has been built using [Fabricator](https://fbrctr.github.io/)
+
+Fabricator is a tool for building website UI toolkits - _think ["Tiny Bootstraps, for Every Client"](http://daverupert.com/2013/04/responsive-deliverables/#tiny-bootstraps-for-every-client)_
+
+### Fabricator Documentation
+
 #### [Read the docs →](http://fbrctr.github.io/docs)
-
-## Demo
-
-#### [Default Fabricator Instance →](http://fbrctr.github.io/demo)
-
-## Credits
-
-Created by [Luke Askew](http://twitter.com/lukeaskew).
-
-Logo by [Abby Putinski](https://abbyputinski.com/)
-
-## License
-
-[The MIT License (MIT)](http://opensource.org/licenses/mit-license.php)
