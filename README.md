@@ -15,8 +15,8 @@ npm install --save @pod-point/design-system
 First, install all of the Node modules needed:
 
 ```bash
-git clone git@github.com:Pod-Point/pod-point-ui-toolkit.git
-cd pod-point-ui-toolkit
+git clone git@github.com:Pod-Point/design-system.git
+cd design-system
 npm install
 ```
 
@@ -32,7 +32,7 @@ npm build
 
 ## Documentation
 
-See full docs [here](https://pod-point.github.io/pod-point-ui-toolkit)
+See full docs [here](https://pod-point.github.io/design-system)
 
 ## TailwindCSS
 To use Tailwind and the Pod Point config, first [install Tailwind](https://tailwindcss.com/docs/installation) to your project and then copy the `tailwind.config.js` file into the root of your project and build the assets, we tend to use Gulp, but feel free to build as you wish.
