@@ -6,8 +6,8 @@
   "homepage": "http://fbrctr.github.io/",
   "scripts": {
     "prestart": "npm install",
-    "build": "npm run prestart && gulp",
     "start": "gulp --dev",
+    "build": "gulp",
     "test": "eslint --fix . && npm run build",
     "lint": "eslint ."
   },
